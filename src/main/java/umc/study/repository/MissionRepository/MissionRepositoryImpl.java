@@ -6,8 +6,8 @@ import com.querydsl.core.types.SubQueryExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import umc.study.domain.enums.MissionStatus;
-import umc.study.dto.MissionRegionDto;
-import umc.study.dto.QMissionRegionDto;
+import umc.study.web.dto.MissionRegionDto;
+import umc.study.web.dto.QMissionRegionDto;
 
 import java.time.LocalDate;
 import java.util.List;

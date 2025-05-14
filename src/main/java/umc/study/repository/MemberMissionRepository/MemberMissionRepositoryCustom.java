@@ -1,7 +1,7 @@
 package umc.study.repository.MemberMissionRepository;
 
 import umc.study.domain.enums.MissionStatus;
-import umc.study.dto.MemberMissionDto;
+import umc.study.web.dto.MemberMissionDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

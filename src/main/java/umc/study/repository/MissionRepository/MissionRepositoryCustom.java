@@ -1,6 +1,6 @@
 package umc.study.repository.MissionRepository;
 
-import umc.study.dto.MissionRegionDto;
+import umc.study.web.dto.MissionRegionDto;
 import java.time.LocalDate;
 import java.util.List;
 

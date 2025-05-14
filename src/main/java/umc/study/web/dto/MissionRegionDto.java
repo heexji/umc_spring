@@ -1,4 +1,4 @@
-package umc.study.dto;
+package umc.study.web.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;

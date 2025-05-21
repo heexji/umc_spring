@@ -6,9 +6,9 @@ import umc.study.domain.common.BaseEntity;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 public class ReviewImage extends BaseEntity {
 
     @Id
@@ -23,4 +23,8 @@ public class ReviewImage extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
     private Review review;
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
 }

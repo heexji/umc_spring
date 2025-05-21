@@ -37,4 +37,16 @@ public class Review extends BaseEntity {
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewImage> reviewImageList = new ArrayList<>();
 
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public void addReviewImage(ReviewImage reviewImage) {
+        this.reviewImageList.add(reviewImage);
+        reviewImage.setReview(this); // 이거 쓰려면 위에서 설명한 메서드 필수
+    }
 }

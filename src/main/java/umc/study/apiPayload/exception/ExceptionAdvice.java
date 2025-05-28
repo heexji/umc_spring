@@ -33,10 +33,23 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         String errorMessage = e.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생"));
+                .orElse("유효성 검증 실패");
 
-        return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY,request);
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus._BAD_REQUEST.getCode(),
+                errorMessage,  // ❗ 메시지는 그대로 노출
+                null
+        );
+
+        return super.handleExceptionInternal(
+                e,
+                body,
+                HttpHeaders.EMPTY,
+                ErrorStatus._BAD_REQUEST.getHttpStatus(),
+                request
+        );
     }
+
 
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {

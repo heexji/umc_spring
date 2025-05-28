@@ -7,6 +7,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import umc.study.service.StoreService.StoreQueryService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import umc.study.domain.Review;
+import umc.study.repository.ReviewRepository.ReviewRepository;
+import umc.study.web.dto.StoreResponseDto;
+
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @EnableJpaAuditing

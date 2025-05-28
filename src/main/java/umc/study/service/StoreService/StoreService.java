@@ -2,6 +2,8 @@ package umc.study.service.StoreService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import umc.study.apiPayload.code.status.ErrorStatus;
+import umc.study.apiPayload.exception.GeneralException;
 import umc.study.converter.MissionConverter;
 import umc.study.domain.Mission;
 import umc.study.domain.Store;
@@ -18,7 +20,7 @@ public class StoreService {
 
     public void addMissionToStore(Long storeId, StoreRequestDto.AddMissionDto dto) {
         Store store = storeRepository.findById(storeId)
-                .orElseThrow(() -> new IllegalArgumentException("Store not found"));
+                .orElseThrow(() -> new GeneralException(ErrorStatus.STORE_NOT_FOUND));
 
         Mission mission = MissionConverter.toMission(dto);
         mission.setStore(store);

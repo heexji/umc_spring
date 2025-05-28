@@ -2,6 +2,8 @@ package umc.study.web.dto;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 public class ReviewRequestDto {
 
     @Getter
@@ -10,5 +12,6 @@ public class ReviewRequestDto {
         private Float score;
         private String title;
         private String body;
+        LocalDate createAt;
     }
 }

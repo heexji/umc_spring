@@ -34,11 +34,23 @@ public class MemberConverter {
         }
 
         return Member.builder()
+                .name(request.getName())
+                .email(request.getEmail())   // 추가된 코드
+                .password(request.getPassword())   // 추가된 코드
+                .gender(gender)
                 .address(request.getAddress())
                 .specAddress(request.getSpecAddress())
-                .gender(gender)
-                .name(request.getName())
+                .role(request.getRole())   // 추가된 코드
                 .memberPreferList(new ArrayList<>())
+                .build();
+    }
+
+    // 새로 추가된 메서드 - Member 엔티티를 MemberInfoDTO로 변환
+    public static MemberResponseDto.MemberInfoDTO toMemberInfoDTO(Member member) {
+        return MemberResponseDto.MemberInfoDTO.builder()
+                .name(member.getName())
+                .email(member.getEmail())
+                .gender(member.getGender().toString()) // Gender enum을 String으로 변환
                 .build();
     }
 }

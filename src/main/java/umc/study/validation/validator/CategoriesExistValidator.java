@@ -24,15 +24,22 @@ public class CategoriesExistValidator implements ConstraintValidator<ExistCatego
 
     @Override
     public boolean isValid(List<Long> values, ConstraintValidatorContext context) {
+        // null 또는 빈 배열일 경우, 유효하다고 간주
+        if (values == null || values.isEmpty()) {
+            return true;
+        }
+
         boolean isValid = values.stream()
                 .allMatch(value -> foodCategoryRepository.existsById(value));
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.FOOD_CATEGORY_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(
+                    ErrorStatus.FOOD_CATEGORY_NOT_FOUND.toString()
+            ).addConstraintViolation();
         }
 
         return isValid;
-
     }
+
 }

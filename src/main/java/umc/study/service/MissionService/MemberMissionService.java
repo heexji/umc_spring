@@ -3,6 +3,7 @@ package umc.study.service.MissionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exception.handler.MissionHandler;
 import umc.study.apiPayload.exception.handler.MemberHandler;
 import umc.study.domain.Member;
@@ -25,13 +26,13 @@ public class MemberMissionService {
     @Transactional
     public void challengeMission(MissionChallengeDto.ChallengeDto dto) {
         Member member = memberRepository.findById(dto.getMemberId())
-                .orElseThrow(() -> new MemberHandler("존재하지 않는 유저입니다."));
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
         Mission mission = missionRepository.findById(dto.getMissionId())
-                .orElseThrow(() -> new MissionHandler("존재하지 않는 미션입니다."));
+                .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
 
         if (memberMissionRepository.existsByMemberAndMission(member, mission)) {
-            throw new MissionHandler("이미 도전 중인 미션입니다.");
+            throw new MissionHandler(ErrorStatus.MISSION_ALREADY_CHALLENGING);
         }
 
         MemberMission memberMission = MemberMission.builder()
